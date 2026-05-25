@@ -6,14 +6,19 @@ const Message = require("../models/message");
 // Update User Profile (Owner Details)
 exports.updateProfile = async (req, res) => {
     try {
-        const { fullName, email, state, city } = req.body;
+        const { fullName, email, state, city, age, gender, height, weight, phone } = req.body;
         const userId = req.user.id;
 
         const updateData = {
             fullName,
             email,
             state,
-            city
+            city,
+            age,
+            gender,
+            height,
+            weight,
+            phone
         };
 
         if (req.file) {
