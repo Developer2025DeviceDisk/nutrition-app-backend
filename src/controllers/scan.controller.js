@@ -44,8 +44,8 @@ exports.analyzeImage = async (req, res) => {
         const filePath = req.file.path;
         const mimeType = getMimeType(filePath);
 
-        // Initialize Gemini 1.5 Flash model (fast + free tier)
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        // Initialize Gemini 3.5 Flash model
+        const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
 
         const prompt = `You are a professional nutritionist and food analyst. Analyze this food image carefully.
 
