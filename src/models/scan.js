@@ -19,20 +19,25 @@ const scanSchema = new mongoose.Schema(
       {
         name: String,
         quantity: Number,
+        servingSize: String,
         nutrition: {
           calories: Number,
           protein: Number,
           carbs: Number,
           fat: Number,
-        }
-      }
+          fiber: Number,
+          sugar: Number,
+          sodium: Number,
+        },
+      },
     ],
     nutrition: {
-        calories: { type: Number, default: 0 },
-        protein: { type: Number, default: 0 },
-        carbs: { type: Number, default: 0 },
-        fat: { type: Number, default: 0 }
-    }
+      calories: { type: Number, default: 0 },
+      protein: { type: Number, default: 0 },
+      carbs: { type: Number, default: 0 },
+      fat: { type: Number, default: 0 },
+      fiber: { type: Number, default: 0 },
+    },
   },
   { timestamps: true }
 );
