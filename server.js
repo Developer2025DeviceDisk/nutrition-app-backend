@@ -22,6 +22,10 @@ app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+app.get("/ping", (req, res) => {
+  res.status(200).json({ message: "ping" });
+});
+
 connectDB();
 app.use("/api", indexRouter);
 
