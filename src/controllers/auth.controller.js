@@ -6,6 +6,16 @@ const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
+// 🧪 Test number that always receives a fixed OTP (for testing purposes only)
+const TEST_PHONE = "9555942520";
+const TEST_OTP   = "123456";
+
+// Returns fixed OTP for the test number, random OTP for everyone else
+const getOTP = (phone) => {
+  if (phone === TEST_PHONE) return TEST_OTP;
+  return generateOTP();
+};
+
 // ================= REGISTER / LOGIN (Unified) =================
 exports.register = async (req, res) => {
   try {
@@ -21,8 +31,8 @@ exports.register = async (req, res) => {
       user = await User.create({ phone });
     }
 
-    // Generate OTP
-    const otp = generateOTP();
+    // Generate OTP (fixed OTP for test number, random for all others)
+    const otp = getOTP(phone);
     const otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expiry
 
     user.otp = otp;
@@ -89,7 +99,7 @@ exports.resendOtp = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const otp = generateOTP();
+    const otp = getOTP(phone); // fixed OTP for test number, random for all others
     user.otp = otp;
     user.otpExpires = new Date(Date.now() + 10 * 60 * 1000);
     await user.save();
