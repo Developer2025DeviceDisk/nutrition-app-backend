@@ -114,3 +114,18 @@ exports.resendOtp = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// ================= DELETE ACCOUNT =================
+exports.deleteAccount = async (req, res) => {
+  try {
+    // req.user is set by the auth middleware
+    await User.findByIdAndDelete(req.user._id);
+
+    res.status(200).json({
+      success: true,
+      message: "Account deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
